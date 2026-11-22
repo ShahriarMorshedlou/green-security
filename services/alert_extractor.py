@@ -1,6 +1,6 @@
 from data.json_reader import read_json
 
-def extract_alerts():
+def extract_alerts_ids():
     data = read_json("security_alerts.json")
 
     for alert in data:
@@ -8,3 +8,4 @@ def extract_alerts():
         alert_id = rule.get("id")
 
         print(alert_id)
+
