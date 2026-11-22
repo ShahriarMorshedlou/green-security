@@ -9,3 +9,6 @@ print(result2)
 
 result3 = extract_alerts_severity()
 print(result3)
+
+result4 = extract_alerts_risk_score()
+print(result4)
