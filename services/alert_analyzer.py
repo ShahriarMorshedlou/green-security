@@ -28,11 +28,10 @@ def number_of_each_severity_level():
 
 def find_highest_risk_score():
     risk_scores = extract_alerts_risk_score()
-
     highest_risk_score = risk_scores[0]
     for alter in risk_scores:
         if alter > risk_scores[0]:
-            alter = highest_risk_score
+            highest_risk_score = alter
 
     return highest_risk_score
 
