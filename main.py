@@ -6,3 +6,6 @@ print(result)
 
 result2 = extract_alerts_names()
 print(result2)
+
+result3 = extract_alerts_severity()
+print(result3)

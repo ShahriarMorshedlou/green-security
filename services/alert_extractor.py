@@ -21,3 +21,11 @@ def extract_alerts_names():
         alert_name = rule.get("name")
 
         print(alert_name)
+
+def extract_alerts_severity():
+    data = read_json("security_alerts.json")
+    for alert in data:
+        rule = alert.get("rule") or {}
+        alert_severity = rule.get("severity")
+
+        print(alert_severity)
