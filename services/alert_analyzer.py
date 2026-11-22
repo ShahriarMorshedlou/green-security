@@ -54,4 +54,24 @@ def risk_score_average():
 
     return average_risk_score
 
+def get_high_and_critical_alerts():
+    extract_all_alerts = read_json("security_alerts.json")
 
+    high_and_critical_alerts = []
+
+    for alert in extract_all_alerts:
+        if alert is None:
+            continue
+
+        rule = alert.get("rule") or {}
+        severity = rule.get("severity")
+
+        if severity is None:
+            continue
+
+        severity = severity.upper()
+
+        if severity == "HIGH" or severity == "CRITICAL":
+            high_and_critical_alerts.append(alert)
+
+    return high_and_critical_alerts
