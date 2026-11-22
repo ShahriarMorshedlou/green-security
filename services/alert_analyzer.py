@@ -1,0 +1,27 @@
+from services.alert_extractor import *
+
+
+def number_of_each_severity_level():
+    alerts = extract_alerts_severity()
+
+    severity_levels = {
+        "CRITICAL": 0,
+        "HIGH": 0,
+        "MEDIUM": 0,
+        "LOW": 0
+    }
+
+    for alert in alerts:
+        if alert is None:
+            continue
+        severity = alert.strip().upper()
+        if severity == "CRITICAL":
+            severity_levels["CRITICAL"] += 1
+        elif severity == "HIGH":
+            severity_levels["HIGH"] += 1
+        elif severity == "MEDIUM":
+            severity_levels["MEDIUM"] += 1
+        elif severity == "LOW":
+            severity_levels["LOW"] += 1
+
+    return severity_levels
