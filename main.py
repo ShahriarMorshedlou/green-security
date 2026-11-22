@@ -1,4 +1,3 @@
-from services.alert_extractor import *
 from services.alert_analyzer import *
 
 print("Alert IDs:", extract_alerts_ids())

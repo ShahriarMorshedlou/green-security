@@ -75,3 +75,4 @@ def get_high_and_critical_alerts():
             high_and_critical_alerts.append(alert)
 
     return high_and_critical_alerts
+
