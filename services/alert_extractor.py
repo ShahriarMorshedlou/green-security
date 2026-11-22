@@ -65,3 +65,11 @@ def extract_alerts_source_ip_and_timestamp():
         })
 
     return alert_events
+
+def extract_alerts_count():
+    data = read_json("security_alerts.json")
+    alert_count = 0
+    for alert in data:
+        alert_count += 1
+
+    return alert_count
