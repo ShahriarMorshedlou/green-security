@@ -10,3 +10,4 @@ print("Alert_count:" , extract_alerts_count())
 
 print("number_of_each_severity_level:" , number_of_each_severity_level())
 print("highest risk_score: " , find_highest_risk_score())
+print(f"average risk_score",risk_score_average())

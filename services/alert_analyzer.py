@@ -26,6 +26,7 @@ def number_of_each_severity_level():
 
     return severity_levels
 
+
 def find_highest_risk_score():
     risk_scores = extract_alerts_risk_score()
     highest_risk_score = risk_scores[0]
@@ -34,4 +35,23 @@ def find_highest_risk_score():
             highest_risk_score = alter
 
     return highest_risk_score
+
+
+def risk_score_average():
+    risk_scores = extract_alerts_risk_score()
+    total = 0
+    valid_count = 0
+
+    for alter in risk_scores:
+        if alter is None:
+            continue
+        total += alter
+        valid_count += 1
+    if valid_count == 0:
+        return 0
+
+    average_risk_score = total / valid_count
+
+    return average_risk_score
+
 
