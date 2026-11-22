@@ -1,14 +1,12 @@
-from services.alert_extractor import *
+from services import alert_extractor
 
-result = extract_alerts_ids()
+print("Alert IDs:", alert_extractor.extract_alerts_ids())
 
-print(result)
+print("Alert Names:", alert_extractor.extract_alerts_names())
 
-result2 = extract_alerts_names()
-print(result2)
+print("Alert Severities:", alert_extractor.extract_alerts_severity())
 
-result3 = extract_alerts_severity()
-print(result3)
+print("Alert Risk Scores:", alert_extractor.extract_alerts_risk_score())
 
-result4 = extract_alerts_risk_score()
-print(result4)
+print("Alert Source IPs and Timestamps:",
+      alert_extractor.extract_alerts_source_ip_and_timestamp())
