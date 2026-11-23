@@ -2,6 +2,8 @@ from services.alert_analyzer import *
 from services.alert_search import *
 from pprint import pprint
 from services.alert_reporter import *
+from services.report_generator import report_generator
+from output.json_writer import save_report
 
 print("Alert IDs:", extract_alerts_ids())
 print("Alert Names:", extract_alerts_names())
@@ -40,3 +42,9 @@ else:
 print("security alerts report: ")
 report = generate_alert_report()
 pprint(report, sort_dicts=False)
+
+
+report = report_generator()
+save_report(report)
+print("Report generated successfully!")
+
