@@ -1,5 +1,6 @@
 from services.alert_analyzer import *
 from services.alert_search import *
+from pprint import pprint
 
 print("Alert IDs:", extract_alerts_ids())
 print("Alert Names:", extract_alerts_names())
@@ -15,3 +16,7 @@ print(f"high and critical alert: " , get_high_and_critical_alerts())
 
 print("search by source_ip: " , search_alerts_by_source_ip(input("enter your ip: ")))
 print("search by name or part of name: " , search_alerts_by_name_or_part_of_name(input("enter name or part of name: ")))
+
+severity = input("Enter severity level: ")
+print("Filter by severity level:")
+pprint(filter_alerts_by_severity(severity), sort_dicts=False)
