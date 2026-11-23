@@ -28,13 +28,28 @@ def number_of_each_severity_level():
 
 
 def find_highest_risk_score():
-    risk_scores = extract_alerts_risk_score()
-    highest_risk_score = risk_scores[0]
-    for alter in risk_scores:
-        if alter > risk_scores[0]:
-            highest_risk_score = alter
+    alerts = read_json("security_alerts.json")
 
-    return highest_risk_score
+    highest_score = None
+    highest_alert = None
+
+    for alert in alerts:
+        if alert is None:
+            continue
+
+        rule = alert.get("rule") or {}
+        risk_score = rule.get("risk_score")
+
+        if risk_score is None:
+            continue
+
+        if highest_score is None or risk_score > highest_score:
+            highest_score = risk_score
+            highest_alert = alert
+
+    return highest_alert
+
+
 
 
 def risk_score_average():
