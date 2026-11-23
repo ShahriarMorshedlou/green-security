@@ -1,9 +1,7 @@
-from pydoc import resolve
-from unittest import result
-
 from services.alert_analyzer import *
 from services.alert_search import *
 from pprint import pprint
+from services.alert_reporter import *
 
 print("Alert IDs:", extract_alerts_ids())
 print("Alert Names:", extract_alerts_names())
@@ -38,3 +36,7 @@ if results:
     pprint(results, sort_dicts=False)
 else:
     print("No results")
+
+print("security alerts report: ")
+report = generate_alert_report()
+pprint(report, sort_dicts=False)
