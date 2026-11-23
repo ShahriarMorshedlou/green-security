@@ -14,4 +14,4 @@ print(f"average risk_score",risk_score_average())
 print(f"high and critical alert: " , get_high_and_critical_alerts())
 
 print("search by source_ip: " , search_alerts_by_source_ip(input("enter your ip: ")))
-
+print("search by name or part of name: " , search_alerts_by_name_or_part_of_name(input("enter name or part of name: ")))
