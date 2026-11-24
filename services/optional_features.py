@@ -27,3 +27,20 @@ def detect_duplicate_alert():
 
     if not duplicate_alert_list:
         print("No duplicate alert")
+
+
+def get_risk_score(alert):
+    rule = alert.get("rule") or {}
+    return rule.get("risk_score") or 0
+
+
+def sort_alerts_by_risk_score():
+    alert_security = read_json("security_alerts.json")
+
+    sorted_alerts = sorted(
+        alert_security,
+        key=get_risk_score,
+        reverse=True
+    )
+
+    return sorted_alerts

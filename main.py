@@ -5,6 +5,8 @@ from services.alert_reporter import *
 from services.report_generator import report_generator
 from output.json_writer import save_report
 from services.optional_features import detect_duplicate_alert
+from services.optional_features import sort_alerts_by_risk_score
+
 print(detect_duplicate_alert())
 print("Alert IDs:", extract_alerts_ids())
 print("Alert Names:", extract_alerts_names())
@@ -44,12 +46,9 @@ print("security alerts report: ")
 report = generate_alert_report()
 pprint(report, sort_dicts=False)
 
-
 report = report_generator()
 save_report(report)
 print("Report generated successfully!")
 
-
 print(detect_duplicate_alert())
-
-
+print(f"sorted alerts by risk score:  {sort_alerts_by_risk_score()}")
