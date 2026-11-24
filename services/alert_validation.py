@@ -235,8 +235,70 @@ def validate_ssrf(alert):
 
     return "MISMATCH"
 
-# def validate_login_brute_force():
+def validate_login_brute_force(alert):
+
+    # extract attributes
+    rule = alert.get("rule") or {}
+    evidence = alert.get("evidence") or {}
+
+    logic = (rule.get("logic") or "").lower()
+
+    matched_pattern = (evidence.get("matched_pattern") or "").lower()
+    reason = (evidence.get("reason") or "").lower()
+
+
+    # 1. Identify Login Brute Force from rule.logic
+
+    brute_force_logic_keywords = [
+        "brute force",
+        "login"
+    ]
+
+    if not all(keyword in logic for keyword in brute_force_logic_keywords):
+        return "INSUFFICIENT"
+
+    # 2. Check required evidence
+
+    if not matched_pattern or not reason:
+        return "INSUFFICIENT"
+
+    # 3. Check Login Brute Force patterns in matched_pattern
+
+    brute_force_evidence_patterns = [
+        "failed login",
+        "failed authentication",
+        "multiple login attempts",
+        "repeated login attempts",
+        "invalid credentials",
+        "too many login attempts",
+        "authentication failure"
+    ]
+
+    if any(pattern in matched_pattern for pattern in brute_force_evidence_patterns):
+        return "MATCH"
+
+    # 4. Check Login Brute Force keywords in reason
+
+    brute_force_reason_keywords = [
+        "repeated login attempts",
+        "multiple failed logins",
+        "repeated authentication failures",
+        "credential guessing",
+        "password guessing",
+        "brute force attack",
+        "account login attempts"
+    ]
+
+    if any(keyword in reason for keyword in brute_force_reason_keywords):
+        return "MATCH"
+
+    return "MISMATCH"
+
+
 # def validate_directory_brute_force():
+
 # def validate_command_injection():
+
 # def validate_executable_upload():
+
 # def validate_auth_bypass():
