@@ -214,6 +214,46 @@ The application includes error-handling mechanisms for common situations, such a
 - Data Analysis
 - Structured Report Generation
 
+
+## Web Security Threat Research
+
+Alongside project development, OWASP resources were studied to gain a better understanding of common web security threats, how they occur, and the potential risks they pose to systems.
+
+The topics covered include:
+
+1. **SQL Injection (SQLi)**
+   - [OWASP Article](https://lnkd.in/eznSTJJa)
+
+2. **Cross-Site Scripting (XSS)**
+   - [OWASP Article](https://lnkd.in/eZqsgASG)
+
+3. **Path Traversal**
+   - [OWASP Article](https://lnkd.in/eiVfGzRg)
+
+4. **Local File Inclusion (LFI)**
+   - [OWASP Article](https://lnkd.in/ehwGfB_t)
+
+5. **Server-Side Request Forgery (SSRF)**
+   - [OWASP Article](https://lnkd.in/eDxRRHXM)
+
+6. **Web Login Brute Force**
+   - [OWASP Article](https://lnkd.in/eMi52cND)
+
+7. **Web Directory Brute Force**
+   - [OWASP Article](https://lnkd.in/eF7-FGMD)
+
+8. **OS Command Injection**
+   - [OWASP Article](https://lnkd.in/ekNV3fWx)
+
+9. **Suspicious Executable File Upload**
+   - [OWASP Article](https://lnkd.in/eR-8HYAy)
+
+10. **HTTP Authentication Bypass**
+    - [OWASP Article](https://lnkd.in/eReUpmMJ)
+
+The purpose of this research was to understand common attack techniques, how they work, and the potential security risks they introduce to web applications.
+
+
 ## Future Improvements
 
 Potential improvements for future versions include:
