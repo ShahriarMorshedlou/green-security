@@ -546,3 +546,47 @@ def validate_auth_bypass(alert):
         return "MATCH"
 
     return "MISMATCH"
+
+
+def validate_lfi(alert):
+
+    # Extract attributes
+    rule = alert.get("rule") or {}
+    evidence = alert.get("evidence") or {}
+
+    logic = (rule.get("logic") or "").lower()
+
+    matched_pattern = (evidence.get("matched_pattern") or "").lower()
+    reason = (evidence.get("reason") or "").lower()
+
+    # 1. Identify attack type
+    if not all(keyword in logic for keyword in ["local file inclusion", "file inclusion"]):
+        return "INSUFFICIENT"
+
+    # 2. Check required evidence
+    if not matched_pattern or not reason:
+        return "INSUFFICIENT"
+
+    # 3. Check matched patterns
+    if any(pattern in matched_pattern for pattern in [
+        "../",
+        "..\\",
+        "/etc/passwd",
+        "/etc/shadow",
+        "file://",
+        "php://filter",
+        "php://input"
+    ]):
+        return "MATCH"
+
+    # 4. Check reason
+    if any(keyword in reason for keyword in [
+        "local file inclusion",
+        "sensitive file",
+        "file disclosure",
+        "local file",
+        "path traversal"
+    ]):
+        return "MATCH"
+
+    return "MISMATCH"
