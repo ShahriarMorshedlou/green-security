@@ -6,8 +6,9 @@ from services.report_generator import report_generator
 from output.json_writer import save_report
 from services.optional_features import detect_duplicate_alert
 from services.optional_features import sort_alerts_by_risk_score
+from services.optional_features import search_by_destination_ip
 
-print(detect_duplicate_alert())
+
 print("Alert IDs:", extract_alerts_ids())
 print("Alert Names:", extract_alerts_names())
 print("Alert Severities:", extract_alerts_severity())
@@ -52,3 +53,8 @@ print("Report generated successfully!")
 
 print(detect_duplicate_alert())
 print(f"sorted alerts by risk score:  {sort_alerts_by_risk_score()}")
+
+
+ip = input("Enter the destination IP address: ")
+results = search_by_destination_ip(ip)
+pprint(results, sort_dicts=False)

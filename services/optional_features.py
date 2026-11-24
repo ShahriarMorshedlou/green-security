@@ -44,3 +44,20 @@ def sort_alerts_by_risk_score():
     )
 
     return sorted_alerts
+
+
+def search_by_destination_ip(ip):
+    alert_security = read_json("security_alerts.json")
+    matching_alerts = []
+
+    for alert in alert_security:
+        if alert is None:
+            continue
+
+        event = alert.get("event") or {}
+        destination_ip = event.get("destination.ip")
+
+        if ip == destination_ip:
+            matching_alerts.append(alert)
+
+    return matching_alerts
