@@ -55,7 +55,67 @@ def validate_sql_injection(alert):
 
     return "MISMATCH"
 
-# def validate_xss():
+
+def validate_xss(alert):
+
+    # extract attributes
+    rule = alert.get("rule") or {}
+    evidence = alert.get("evidence") or {}
+
+    logic = (rule.get("logic") or "").lower()
+
+    matched_pattern = (evidence.get("matched_pattern") or "").lower()
+    reason = (evidence.get("reason") or "").lower()
+
+
+    # 1. Identify XSS from rule.logic
+
+    xss_logic_keywords = [
+        "xss",
+        "cross-site scripting"
+    ]
+
+    if not all(keyword in logic for keyword in xss_logic_keywords):
+        return "INSUFFICIENT"
+
+    # 2. Check required evidence
+
+    if not matched_pattern or not reason:
+        return "INSUFFICIENT"
+
+    # 3. Check XSS patterns in matched_pattern
+
+    xss_evidence_patterns = [
+        "<script",
+        "javascript:",
+        "onerror=",
+        "onload=",
+        "alert(",
+        "document.cookie",
+        "<svg",
+        "<iframe"
+    ]
+
+    if any(pattern in matched_pattern for pattern in xss_evidence_patterns):
+        return "MATCH"
+
+    # 4. Check XSS keywords in reason
+
+    xss_reason_keywords = [
+        "script injection",
+        "cross-site scripting",
+        "malicious javascript",
+        "html injection",
+        "javascript execution",
+        "browser execution"
+    ]
+
+    if any(keyword in reason for keyword in xss_reason_keywords):
+        return "MATCH"
+
+    return "MISMATCH"
+
+
 # def validate_path_traversal():
 # def validate_lfi():
 # def validate_ssrf():
