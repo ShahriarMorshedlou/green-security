@@ -295,7 +295,69 @@ def validate_login_brute_force(alert):
     return "MISMATCH"
 
 
-# def validate_directory_brute_force():
+def validate_directory_brute_force(alert):
+
+    # extract attributes
+    rule = alert.get("rule") or {}
+    evidence = alert.get("evidence") or {}
+
+    logic = (rule.get("logic") or "").lower()
+
+    matched_pattern = (evidence.get("matched_pattern") or "").lower()
+    reason = (evidence.get("reason") or "").lower()
+
+
+    # 1. Identify Directory Brute Force from rule.logic
+
+    directory_brute_force_logic_keywords = [
+        "directory brute force",
+        "directory enumeration"
+    ]
+
+    if not all(keyword in logic for keyword in directory_brute_force_logic_keywords):
+        return "INSUFFICIENT"
+
+    # 2. Check required evidence
+
+    if not matched_pattern or not reason:
+        return "INSUFFICIENT"
+
+    # 3. Check Directory Brute Force patterns in matched_pattern
+
+    directory_brute_force_evidence_patterns = [
+        "404",
+        "403",
+        "admin",
+        "backup",
+        "config",
+        "uploads",
+        "phpmyadmin",
+        ".env",
+        "robots.txt",
+        "directory listing"
+    ]
+
+    if any(pattern in matched_pattern for pattern in directory_brute_force_evidence_patterns):
+        return "MATCH"
+
+    # 4. Check Directory Brute Force keywords in reason
+
+    directory_brute_force_reason_keywords = [
+        "directory enumeration",
+        "directory brute force",
+        "multiple directory requests",
+        "multiple path requests",
+        "repeated requests",
+        "directory discovery",
+        "file and directory discovery",
+        "web content discovery"
+    ]
+
+    if any(keyword in reason for keyword in directory_brute_force_reason_keywords):
+        return "MATCH"
+
+    return "MISMATCH"
+
 
 # def validate_command_injection():
 
