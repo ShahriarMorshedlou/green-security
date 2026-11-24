@@ -217,42 +217,39 @@ output/report.json
 
 ## مطالعه و آشنایی با تهدیدات امنیتی وب
 
-در کنار توسعه پروژه، برای آشنایی بیشتر با تهدیدات رایج امنیت وب و درک نحوه عملکرد آن‌ها، مقالاتی از منابع OWASP مطالعه شده است.
+در کنار توسعه پروژه، برای شناخت بهتر تهدیدات رایج امنیت وب، نحوه وقوع آن‌ها و خطرات احتمالی‌شان، ۱۰ موضوع از منابع OWASP مطالعه شده است.
 
-موضوعات مورد مطالعه شامل موارد زیر هستند:
+1. **SQL Injection (SQLi)**
+   - [OWASP - SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
 
-1. **SQL Injection (SQLi)** — تزریق دستورات SQL
-   - [OWASP Article](https://lnkd.in/eznSTJJa)
+2. **Cross-Site Scripting (XSS)**
+   - [OWASP - Cross Site Scripting Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
 
-2. **Cross-Site Scripting (XSS)** — اجرای اسکریپت مخرب در مرورگر کاربران
-   - [OWASP Article](https://lnkd.in/eZqsgASG)
+3. **Path Traversal**
+   - [OWASP - Path Traversal Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Path_Traversal_Prevention_Cheat_Sheet.html)
 
-3. **Path Traversal** — دسترسی غیرمجاز به مسیرها و فایل‌های خارج از محدوده مجاز
-   - [OWASP Article](https://lnkd.in/eiVfGzRg)
+4. **Local File Inclusion (LFI)**
+   - [OWASP - File Inclusion](https://wstg.owasp.org/latest/11-Injection/10.1-File_Inclusion/)
 
-4. **Local File Inclusion (LFI)** — بارگذاری فایل‌های محلی از طریق ورودی کنترل‌نشده
-   - [OWASP Article](https://lnkd.in/ehwGfB_t)
+5. **Server-Side Request Forgery (SSRF)**
+   - [OWASP - SSRF Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html)
 
-5. **Server-Side Request Forgery (SSRF)** — وادار کردن سرور به ارسال درخواست‌های ناخواسته
-   - [OWASP Article](https://lnkd.in/eDxRRHXM)
+6. **Web Login Brute Force**
+   - [OWASP - Testing for Weak Lock Out Mechanism](https://wstg.owasp.org/stable/4-Web_Application_Security_Testing/04-Authentication_Testing/03-Testing_for_Weak_Lock_Out_Mechanism/)
 
-6. **Web Login Brute Force** — تلاش مکرر برای حدس زدن اطلاعات ورود کاربران
-   - [OWASP Article](https://lnkd.in/eMi52cND)
+7. **Web Directory Brute Force**
+   - [OWASP - Enumerate Infrastructure and Application Admin Interfaces](https://wstg.owasp.org/latest/06-Configuration_and_Deployment_Management/04-Enumerate_Infrastructure_and_Application_Admin_Interfaces/)
 
-7. **Web Directory Brute Force** — شناسایی مسیرها و دایرکتوری‌های پنهان وب‌سایت
-   - [OWASP Article](https://lnkd.in/eF7-FGMD)
+8. **OS Command Injection**
+   - [OWASP - OS Command Injection Defense Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html)
 
-8. **OS Command Injection** — تزریق و اجرای دستورات سیستم‌عامل
-   - [OWASP Article](https://lnkd.in/ekNV3fWx)
+9. **Suspicious Executable File Upload**
+   - [OWASP - File Upload Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html)
 
-9. **Suspicious Executable File Upload** — بارگذاری فایل‌های اجرایی مشکوک
-   - [OWASP Article](https://lnkd.in/eR-8HYAy)
+10. **HTTP Authentication Bypass**
+    - [OWASP - Bypassing Authentication Schema](https://wstg.owasp.org/latest/4-Web_Application_Security_Testing/04-Authentication/04-Bypassing_Authentication_Schema/)
 
-10. **HTTP Authentication Bypass** — دور زدن سازوکار احراز هویت HTTP
-    - [OWASP Article](https://lnkd.in/eReUpmMJ)
-
-هدف از این مطالعات، شناخت بهتر روش‌های حمله، نحوه وقوع آن‌ها و خطرات احتمالی برای سیستم‌های وب بوده است.
-
+هدف از این مطالعات، شناخت روش‌های حمله، نحوه عملکرد آن‌ها و خطراتی است که می‌توانند برای برنامه‌های وب ایجاد کنند.
 
 ## توسعه‌های آینده
 
