@@ -66,6 +66,26 @@ def main():
 if __name__ == "__main__":
     main()
 
+
+
+
+from services.optional_features import validate_alerts
+
+if __name__ == "__main__":
+    result = validate_alerts()
+
+    total = sum(len(items) for items in result.values())
+    print("Total:", total)
+
+    for status in ["MATCH", "MISMATCH", "INSUFFICIENT"]:
+        print(f"\n===== {status} ({len(result[status])}) =====")
+        for item in result[status]:
+            print("rule id   :", item["rule_id"])
+            print("rule name :", item["rule_name"])
+            print("attack    :", item["attack_type"])
+            print("reason    :", item["reason"])
+            print()
+
 # print("Alert IDs:", extract_alerts_ids())
 # print("Alert Names:", extract_alerts_names())
 # print("Alert Severities:", extract_alerts_severity())

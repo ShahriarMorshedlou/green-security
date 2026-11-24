@@ -1,6 +1,17 @@
-from os import login_tty
-
 from data.json_reader import read_json
+
+from services.alert_validation import (
+    validate_sql_injection,
+    validate_xss,
+    validate_path_traversal,
+    validate_ssrf,
+    validate_login_brute_force,
+    validate_directory_brute_force,
+    validate_lfi,
+    validate_command_injection,
+    validate_executable_upload,
+    validate_auth_bypass
+)
 
 
 def detect_duplicate_alert():
@@ -46,20 +57,63 @@ def sort_alerts_by_risk_score():
     )
 
     return sorted_alerts
-
-
-def search_by_destination_ip(ip):
+def validate_alerts():
     alert_security = read_json("security_alerts.json")
-    matching_alerts = []
+
+    # (اسم حمله، تابع validator)
+    validators = [
+        ("SQL Injection", validate_sql_injection),
+        ("XSS", validate_xss),
+        ("Path Traversal", validate_path_traversal),
+        ("SSRF", validate_ssrf),
+        ("Login Brute Force", validate_login_brute_force),
+        ("Directory Brute Force", validate_directory_brute_force),
+        ("LFI", validate_lfi),
+        ("Command Injection", validate_command_injection),
+        ("Executable Upload", validate_executable_upload),
+        ("Auth Bypass", validate_auth_bypass),
+    ]
+
+    result = {"MATCH": [], "MISMATCH": [], "INSUFFICIENT": []}
 
     for alert in alert_security:
         if alert is None:
             continue
 
-        event = alert.get("event") or {}
-        destination_ip = event.get("destination.ip")
+        rule = alert.get("rule") or {}
 
-        if ip == destination_ip:
-            matching_alerts.append(alert)
+        match_info = None
+        mismatch_info = None
+        insufficient_reason = None
 
-    return matching_alerts
+        for name, validator in validators:
+            status, reason = validator(alert)
+
+            if status == "MATCH" and match_info is None:
+                match_info = (name, reason)
+            elif status == "MISMATCH" and mismatch_info is None:
+                mismatch_info = (name, reason)
+            elif status == "INSUFFICIENT" and reason is not None and insufficient_reason is None:
+                insufficient_reason = reason
+
+        # تصمیم نهایی
+        if match_info is not None:
+            final_status = "MATCH"
+            attack_type, final_reason = match_info
+        elif mismatch_info is not None:
+            final_status = "MISMATCH"
+            attack_type, final_reason = mismatch_info
+        else:
+            final_status = "INSUFFICIENT"
+            attack_type = None
+            final_reason = insufficient_reason or "نوع حمله از روی rule.logic شناسایی نشد"
+
+        result[final_status].append({
+            "rule_id": rule.get("id"),
+            "rule_name": rule.get("name"),
+            "attack_type": attack_type,
+            "reason": final_reason,
+            "alert": alert,
+        })
+
+    return result
