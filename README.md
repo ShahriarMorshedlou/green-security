@@ -215,41 +215,40 @@ The application includes error-handling mechanisms for common situations, such a
 - Structured Report Generation
 
 
+
 ## Web Security Threat Research
 
-Alongside project development, OWASP resources were studied to gain a better understanding of common web security threats, how they occur, and the potential risks they pose to systems.
-
-The topics covered include:
+Alongside project development, 10 web security topics were studied using OWASP resources to better understand common attack techniques, how they occur, and the potential risks they pose.
 
 1. **SQL Injection (SQLi)**
-   - [OWASP Article](https://lnkd.in/eznSTJJa)
+   - [OWASP - SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
 
 2. **Cross-Site Scripting (XSS)**
-   - [OWASP Article](https://lnkd.in/eZqsgASG)
+   - [OWASP - Cross Site Scripting Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html)
 
 3. **Path Traversal**
-   - [OWASP Article](https://lnkd.in/eiVfGzRg)
+   - [OWASP - Path Traversal Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Path_Traversal_Prevention_Cheat_Sheet.html)
 
 4. **Local File Inclusion (LFI)**
-   - [OWASP Article](https://lnkd.in/ehwGfB_t)
+   - [OWASP - File Inclusion](https://wstg.owasp.org/latest/11-Injection/10.1-File_Inclusion/)
 
 5. **Server-Side Request Forgery (SSRF)**
-   - [OWASP Article](https://lnkd.in/eDxRRHXM)
+   - [OWASP - SSRF Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html)
 
 6. **Web Login Brute Force**
-   - [OWASP Article](https://lnkd.in/eMi52cND)
+   - [OWASP - Testing for Weak Lock Out Mechanism](https://wstg.owasp.org/stable/4-Web_Application_Security_Testing/04-Authentication_Testing/03-Testing_for_Weak_Lock_Out_Mechanism/)
 
 7. **Web Directory Brute Force**
-   - [OWASP Article](https://lnkd.in/eF7-FGMD)
+   - [OWASP - Enumerate Infrastructure and Application Admin Interfaces](https://wstg.owasp.org/latest/06-Configuration_and_Deployment_Management/04-Enumerate_Infrastructure_and_Application_Admin_Interfaces/)
 
 8. **OS Command Injection**
-   - [OWASP Article](https://lnkd.in/ekNV3fWx)
+   - [OWASP - OS Command Injection Defense Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html)
 
 9. **Suspicious Executable File Upload**
-   - [OWASP Article](https://lnkd.in/eR-8HYAy)
+   - [OWASP - File Upload Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html)
 
 10. **HTTP Authentication Bypass**
-    - [OWASP Article](https://lnkd.in/eReUpmMJ)
+    - [OWASP - Bypassing Authentication Schema](https://wstg.owasp.org/latest/4-Web_Application_Security_Testing/04-Authentication/04-Bypassing_Authentication_Schema/)
 
 The purpose of this research was to understand common attack techniques, how they work, and the potential security risks they introduce to web applications.
 
