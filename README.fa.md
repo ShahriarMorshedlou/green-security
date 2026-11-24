@@ -214,6 +214,46 @@ output/report.json
 - Data Analysis
 - Structured Report Generation
 
+
+## مطالعه و آشنایی با تهدیدات امنیتی وب
+
+در کنار توسعه پروژه، برای آشنایی بیشتر با تهدیدات رایج امنیت وب و درک نحوه عملکرد آن‌ها، مقالاتی از منابع OWASP مطالعه شده است.
+
+موضوعات مورد مطالعه شامل موارد زیر هستند:
+
+1. **SQL Injection (SQLi)** — تزریق دستورات SQL
+   - [OWASP Article](https://lnkd.in/eznSTJJa)
+
+2. **Cross-Site Scripting (XSS)** — اجرای اسکریپت مخرب در مرورگر کاربران
+   - [OWASP Article](https://lnkd.in/eZqsgASG)
+
+3. **Path Traversal** — دسترسی غیرمجاز به مسیرها و فایل‌های خارج از محدوده مجاز
+   - [OWASP Article](https://lnkd.in/eiVfGzRg)
+
+4. **Local File Inclusion (LFI)** — بارگذاری فایل‌های محلی از طریق ورودی کنترل‌نشده
+   - [OWASP Article](https://lnkd.in/ehwGfB_t)
+
+5. **Server-Side Request Forgery (SSRF)** — وادار کردن سرور به ارسال درخواست‌های ناخواسته
+   - [OWASP Article](https://lnkd.in/eDxRRHXM)
+
+6. **Web Login Brute Force** — تلاش مکرر برای حدس زدن اطلاعات ورود کاربران
+   - [OWASP Article](https://lnkd.in/eMi52cND)
+
+7. **Web Directory Brute Force** — شناسایی مسیرها و دایرکتوری‌های پنهان وب‌سایت
+   - [OWASP Article](https://lnkd.in/eF7-FGMD)
+
+8. **OS Command Injection** — تزریق و اجرای دستورات سیستم‌عامل
+   - [OWASP Article](https://lnkd.in/ekNV3fWx)
+
+9. **Suspicious Executable File Upload** — بارگذاری فایل‌های اجرایی مشکوک
+   - [OWASP Article](https://lnkd.in/eR-8HYAy)
+
+10. **HTTP Authentication Bypass** — دور زدن سازوکار احراز هویت HTTP
+    - [OWASP Article](https://lnkd.in/eReUpmMJ)
+
+هدف از این مطالعات، شناخت بهتر روش‌های حمله، نحوه وقوع آن‌ها و خطرات احتمالی برای سیستم‌های وب بوده است.
+
+
 ## توسعه‌های آینده
 
 برخی از قابلیت‌هایی که می‌توانند در نسخه‌های بعدی به پروژه اضافه شوند:
