@@ -485,4 +485,64 @@ def validate_executable_upload(alert):
         return "MATCH"
 
     return "MISMATCH"
-# def validate_auth_bypass():
+
+def validate_auth_bypass(alert):
+
+    # extract attributes
+    rule = alert.get("rule") or {}
+    evidence = alert.get("evidence") or {}
+
+    logic = (rule.get("logic") or "").lower()
+
+    matched_pattern = (evidence.get("matched_pattern") or "").lower()
+    reason = (evidence.get("reason") or "").lower()
+
+
+    # 1. Identify Authentication Bypass from rule.logic
+
+    auth_bypass_logic_keywords = [
+        "authentication bypass",
+        "auth bypass"
+    ]
+
+    if not all(keyword in logic for keyword in auth_bypass_logic_keywords):
+        return "INSUFFICIENT"
+
+    # 2. Check required evidence
+
+    if not matched_pattern or not reason:
+        return "INSUFFICIENT"
+
+    # 3. Check Authentication Bypass patterns in matched_pattern
+
+    auth_bypass_evidence_patterns = [
+        "unauthorized access",
+        "authentication bypass",
+        "missing authentication",
+        "invalid token",
+        "forged token",
+        "jwt none",
+        "privilege escalation",
+        "access without credentials"
+    ]
+
+    if any(pattern in matched_pattern for pattern in auth_bypass_evidence_patterns):
+        return "MATCH"
+
+    # 4. Check Authentication Bypass keywords in reason
+
+    auth_bypass_reason_keywords = [
+        "authentication bypass",
+        "authorization bypass",
+        "access without authentication",
+        "missing authentication check",
+        "invalid authentication",
+        "forged authentication token",
+        "unauthorized access",
+        "security control bypass"
+    ]
+
+    if any(keyword in reason for keyword in auth_bypass_reason_keywords):
+        return "MATCH"
+
+    return "MISMATCH"
