@@ -116,8 +116,63 @@ def validate_xss(alert):
     return "MISMATCH"
 
 
-# def validate_path_traversal():
-# def validate_lfi():
+def validate_path_traversal(alert):
+
+    # extract attributes
+    rule = alert.get("rule") or {}
+    evidence = alert.get("evidence") or {}
+
+    logic = (rule.get("logic") or "").lower()
+
+    matched_pattern = (evidence.get("matched_pattern") or "").lower()
+    reason = (evidence.get("reason") or "").lower()
+
+
+    # 1. Identify Path Traversal from rule.logic
+
+    path_traversal_logic_keywords = [
+        "path traversal",
+        "directory traversal"
+    ]
+
+    if not all(keyword in logic for keyword in path_traversal_logic_keywords):
+        return "INSUFFICIENT"
+
+    # 2. Check required evidence
+
+    if not matched_pattern or not reason:
+        return "INSUFFICIENT"
+
+    # 3. Check Path Traversal patterns in matched_pattern
+
+    path_traversal_evidence_patterns = [
+        "../",
+        "..\\",
+        "%2e%2e",
+        "%252e%252e",
+        "/etc/passwd",
+        "windows/win.ini",
+        "boot.ini"
+    ]
+
+    if any(pattern in matched_pattern for pattern in path_traversal_evidence_patterns):
+        return "MATCH"
+
+    # 4. Check Path Traversal keywords in reason
+
+    path_traversal_reason_keywords = [
+        "directory traversal",
+        "path traversal",
+        "parent directory",
+        "sensitive file",
+        "file system access",
+        "directory escape"
+    ]
+
+    if any(keyword in reason for keyword in path_traversal_reason_keywords):
+        return "MATCH"
+
+    return "MISMATCH"# def validate_lfi():
 # def validate_ssrf():
 # def validate_login_brute_force():
 # def validate_directory_brute_force():
