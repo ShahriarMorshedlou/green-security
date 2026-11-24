@@ -359,8 +359,68 @@ def validate_directory_brute_force(alert):
     return "MISMATCH"
 
 
-# def validate_command_injection():
+def validate_command_injection(alert):
 
+    # extract attributes
+    rule = alert.get("rule") or {}
+    evidence = alert.get("evidence") or {}
+
+    logic = (rule.get("logic") or "").lower()
+
+    matched_pattern = (evidence.get("matched_pattern") or "").lower()
+    reason = (evidence.get("reason") or "").lower()
+
+
+    # 1. Identify Command Injection from rule.logic
+
+    command_injection_logic_keywords = [
+        "command injection",
+        "os command"
+    ]
+
+    if not all(keyword in logic for keyword in command_injection_logic_keywords):
+        return "INSUFFICIENT"
+
+    # 2. Check required evidence
+
+    if not matched_pattern or not reason:
+        return "INSUFFICIENT"
+
+    # 3. Check Command Injection patterns in matched_pattern
+
+    command_injection_evidence_patterns = [
+        ";",
+        "&&",
+        "||",
+        "|",
+        "`",
+        "$(",
+        "/bin/sh",
+        "/bin/bash",
+        "whoami",
+        "id",
+        "cat /etc/passwd"
+    ]
+
+    if any(pattern in matched_pattern for pattern in command_injection_evidence_patterns):
+        return "MATCH"
+
+    # 4. Check Command Injection keywords in reason
+
+    command_injection_reason_keywords = [
+        "command injection",
+        "os command execution",
+        "shell command execution",
+        "arbitrary command execution",
+        "command chaining",
+        "shell metacharacter",
+        "system command execution"
+    ]
+
+    if any(keyword in reason for keyword in command_injection_reason_keywords):
+        return "MATCH"
+
+    return "MISMATCH"
 # def validate_executable_upload():
 
 # def validate_auth_bypass():
