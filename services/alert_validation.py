@@ -173,7 +173,68 @@ def validate_path_traversal(alert):
         return "MATCH"
 
     return "MISMATCH"# def validate_lfi():
-# def validate_ssrf():
+
+
+def validate_ssrf(alert):
+
+    # extract attributes
+    rule = alert.get("rule") or {}
+    evidence = alert.get("evidence") or {}
+
+    logic = (rule.get("logic") or "").lower()
+
+    matched_pattern = (evidence.get("matched_pattern") or "").lower()
+    reason = (evidence.get("reason") or "").lower()
+
+
+    # 1. Identify SSRF from rule.logic
+
+    ssrf_logic_keywords = [
+        "ssrf",
+        "server-side request forgery"
+    ]
+
+    if not all(keyword in logic for keyword in ssrf_logic_keywords):
+        return "INSUFFICIENT"
+
+    # 2. Check required evidence
+
+    if not matched_pattern or not reason:
+        return "INSUFFICIENT"
+
+    # 3. Check SSRF patterns in matched_pattern
+
+    ssrf_evidence_patterns = [
+        "127.0.0.1",
+        "localhost",
+        "169.254.169.254",
+        "metadata.google.internal",
+        "file://",
+        "gopher://",
+        "http://127.",
+        "http://localhost"
+    ]
+
+    if any(pattern in matched_pattern for pattern in ssrf_evidence_patterns):
+        return "MATCH"
+
+    # 4. Check SSRF keywords in reason
+
+    ssrf_reason_keywords = [
+        "server-side request",
+        "internal service",
+        "internal network",
+        "cloud metadata",
+        "metadata endpoint",
+        "localhost access",
+        "internal resource"
+    ]
+
+    if any(keyword in reason for keyword in ssrf_reason_keywords):
+        return "MATCH"
+
+    return "MISMATCH"
+
 # def validate_login_brute_force():
 # def validate_directory_brute_force():
 # def validate_command_injection():
