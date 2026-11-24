@@ -4,7 +4,8 @@ from pprint import pprint
 from services.alert_reporter import *
 from services.report_generator import report_generator
 from output.json_writer import save_report
-
+from services.optional_features import detect_duplicate_alert
+print(detect_duplicate_alert())
 print("Alert IDs:", extract_alerts_ids())
 print("Alert Names:", extract_alerts_names())
 print("Alert Severities:", extract_alerts_severity())
@@ -47,4 +48,8 @@ pprint(report, sort_dicts=False)
 report = report_generator()
 save_report(report)
 print("Report generated successfully!")
+
+
+print(detect_duplicate_alert())
+
 
