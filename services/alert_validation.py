@@ -421,6 +421,68 @@ def validate_command_injection(alert):
         return "MATCH"
 
     return "MISMATCH"
-# def validate_executable_upload():
 
+def validate_executable_upload(alert):
+
+    # extract attributes
+    rule = alert.get("rule") or {}
+    evidence = alert.get("evidence") or {}
+
+    logic = (rule.get("logic") or "").lower()
+
+    matched_pattern = (evidence.get("matched_pattern") or "").lower()
+    reason = (evidence.get("reason") or "").lower()
+
+
+    # 1. Identify Executable Upload from rule.logic
+
+    executable_upload_logic_keywords = [
+        "executable upload",
+        "suspicious file upload"
+    ]
+
+    if not all(keyword in logic for keyword in executable_upload_logic_keywords):
+        return "INSUFFICIENT"
+
+    # 2. Check required evidence
+
+    if not matched_pattern or not reason:
+        return "INSUFFICIENT"
+
+    # 3. Check Executable Upload patterns in matched_pattern
+
+    executable_upload_evidence_patterns = [
+        ".exe",
+        ".php",
+        ".jsp",
+        ".asp",
+        ".aspx",
+        ".sh",
+        ".bat",
+        ".cmd",
+        ".dll",
+        ".elf",
+        "application/x-executable",
+        "application/x-msdownload"
+    ]
+
+    if any(pattern in matched_pattern for pattern in executable_upload_evidence_patterns):
+        return "MATCH"
+
+    # 4. Check Executable Upload keywords in reason
+
+    executable_upload_reason_keywords = [
+        "executable file upload",
+        "suspicious file upload",
+        "uploaded executable",
+        "malicious file upload",
+        "server-side script upload",
+        "dangerous file extension",
+        "executable content"
+    ]
+
+    if any(keyword in reason for keyword in executable_upload_reason_keywords):
+        return "MATCH"
+
+    return "MISMATCH"
 # def validate_auth_bypass():
